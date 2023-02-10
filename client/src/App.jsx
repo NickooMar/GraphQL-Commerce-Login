@@ -9,8 +9,8 @@ import Missing from "./pages/Missing";
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<RegisterScreen />} />
-      <Route path="/login" element={<LoginScreen />} />
+      <Route path="/" element={<LoginScreen />} />
+      <Route path="/register" element={<RegisterScreen />} />
 
       {/* Authorized Screen */}
       <Route element={<RequireAuth />}>
