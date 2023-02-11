@@ -44,11 +44,16 @@ const LoginScreen = () => {
             password,
           },
         });
+        console.log(loggedUser.data.login);
 
-        setAuthData(loggedUser.data.login);
-        navigate("/home");
+        const { accessToken, user } = loggedUser.data.login
+
+        setAuthData({ user, accessToken });
+        localStorage.setItem("token", accessToken);
+        // navigate("/home", { replace: true });
         toast.success("Login Succesfully");
       } catch (error) {
+        console.log(error)
         setFormFields(initialState);
         toast.error("Incorrect email or password", {
           progressStyle: { backgroundColor: "#A7A2A9" },
