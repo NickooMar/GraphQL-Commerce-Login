@@ -30,3 +30,13 @@ export const REFRESH_TOKEN = gql`
     }
   }
 `;
+
+export const HANDLE_LOGOUT = gql`
+  mutation {
+    handleLogout {
+      _id
+      email
+      username
+    }
+  }
+`;

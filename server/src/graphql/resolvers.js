@@ -78,13 +78,12 @@ export const resolvers = {
           );
 
           userFound.refreshToken = refreshToken;
-          await userFound.save();          
-          
+          await userFound.save();
 
           return {
             user: userFound,
             accessToken,
-            refreshToken
+            refreshToken,
           };
         } else {
           throw new Error("Passwords doesn't match");
@@ -93,7 +92,7 @@ export const resolvers = {
         throw new Error(error);
       }
     },
-    handleRefreshToken: async (_, args, {req}) => {
+    handleRefreshToken: async (_, args, { req }) => {
       const refreshToken = req.headers.authorization;
 
       const foundUser = await User.findOne({ refreshToken }).exec();
@@ -118,10 +117,25 @@ export const resolvers = {
           { expiresIn: "1d" }
         );
         const token = accessToken;
-        console.log(token);
 
         return { token };
       });
+    },
+
+    handleLogout: async (_, args, { req }) => {
+      const requestToken = req.headers.authorization;
+      try {
+      const foundUser = await User.findOne({refreshToken: requestToken}).exec()
+
+      if(!foundUser) throw new Error('Error - User already logged Out')
+
+      foundUser.refreshToken = ''
+      const result = await foundUser.save();
+
+      return result;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
