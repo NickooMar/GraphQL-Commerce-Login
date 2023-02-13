@@ -40,8 +40,7 @@ export const resolvers = {
         throw new Error(error);
       }
     },
-    login: async (_, args, { req }) => {
-      console.log(req.headers.authorization)
+    login: async (_, args, { req, res }) => {
       const { email, password } = args;
 
       if (!email || !password) throw new Error("Please! Complete all fields");
@@ -79,13 +78,13 @@ export const resolvers = {
           );
 
           userFound.refreshToken = refreshToken;
-          await userFound.save();
-
-          res.cookie("jwt", refreshToken, {httpOnly: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000});
+          await userFound.save();          
+          
 
           return {
             user: userFound,
             accessToken,
+            refreshToken
           };
         } else {
           throw new Error("Passwords doesn't match");
@@ -95,35 +94,34 @@ export const resolvers = {
       }
     },
     handleRefreshToken: async (_, args, {req}) => {
-      console.log(req.headers.authorization);
-      // const { refreshToken } = args;
+      const refreshToken = req.headers.authorization;
 
-      // const foundUser = await User.findOne({ refreshToken }).exec();
-      // if (!foundUser) throw new Error("User not found - Unauthorized");
+      const foundUser = await User.findOne({ refreshToken }).exec();
+      if (!foundUser) throw new Error("User not found - Unauthorized");
 
-      // jwt.verify(refreshToken, JWT_REFRESHTOKEN, (err, decoded) => {
-      //   if (
-      //     err ||
-      //     foundUser.email !== decoded.email ||
-      //     foundUser.username !== decoded.username
-      //   )
-      //     throw new Error("User not match - Unauthorized");
+      return jwt.verify(refreshToken, JWT_REFRESHTOKEN, (err, decoded) => {
+        if (
+          err ||
+          foundUser.email !== decoded.email ||
+          foundUser.username !== decoded.username
+        )
+          throw new Error("User not match - Unauthorized");
 
-      //   const accessToken = jwt.sign(
-      //     {
-      //       UserInfo: {
-      //         username: decoded.username,
-      //         email: decoded.email,
-      //       },
-      //     },
-      //     JWT_ACCESSTOKEN,
-      //     { expiresIn: "10min" }
-      //   );
-      //   const token = accessToken;
-      //   console.log({ token });
+        const accessToken = jwt.sign(
+          {
+            UserInfo: {
+              username: decoded.username,
+              email: decoded.email,
+            },
+          },
+          JWT_ACCESSTOKEN,
+          { expiresIn: "1d" }
+        );
+        const token = accessToken;
+        console.log(token);
 
-      //   return { token };
-      // });
+        return { token };
+      });
     },
   },
 };

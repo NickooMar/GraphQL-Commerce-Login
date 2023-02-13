@@ -18,6 +18,15 @@ export const LOGIN_USER = gql`
         email
         username
       }
+      refreshToken
+    }
+  }
+`;
+
+export const REFRESH_TOKEN = gql`
+  mutation {
+    handleRefreshToken{
+      token
     }
   }
 `;

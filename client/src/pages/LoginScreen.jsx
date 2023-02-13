@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../graphql/users";
+import useToggle from "../hooks/useToggle";
 
 
 const LoginScreen = () => {
@@ -14,6 +15,8 @@ const LoginScreen = () => {
   const navigate = useNavigate();
 
   const [ loginUser ] = useMutation(LOGIN_USER)
+  const [check, toggleCheck] = useToggle("persist", false);
+
 
   // Context
   const { setAuthData, authData } = useAuth();
@@ -44,13 +47,12 @@ const LoginScreen = () => {
             password,
           },
         });
-        console.log(loggedUser.data.login);
 
-        const { accessToken, user } = loggedUser.data.login
+        const { accessToken, user, refreshToken } = loggedUser.data.login
 
         setAuthData({ user, accessToken });
-        localStorage.setItem("token", accessToken);
-        // navigate("/home", { replace: true });
+        localStorage.setItem("refreshToken", refreshToken);
+        navigate("/home", { replace: true });
         toast.success("Login Succesfully");
       } catch (error) {
         console.log(error)
@@ -127,6 +129,15 @@ const LoginScreen = () => {
             <h1 className="mb-4 text-[#6d2ef1] font-semibold">
               <a href="">Forgot password?</a>
             </h1>
+            <div className="persistCheck">
+              <input
+                type="checkbox"
+                onChange={toggleCheck}
+                checked={check}
+                id="persist"
+              />
+              <label htmlFor="persist">Trust this device</label>
+            </div>
             <button
               type="submit"
               className="p-3 bg-[#6d2ef1] rounded-full text-white w-1/2 shadow-md shadow-[#bc8ce4]"
