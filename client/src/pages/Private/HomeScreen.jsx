@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import useAuth from "../../hooks/useAuth";
 import useLogout  from "../../hooks/useLogout";
@@ -6,6 +6,8 @@ import useLogout  from "../../hooks/useLogout";
 const HomeScreen = () => {
   const { authData } = useAuth();
   const logout = useLogout();
+
+  // console.log(authData);
 
   return (
     <div className="h-screen w-screen bg-[#6d2ef1]">

@@ -32,14 +32,12 @@ const client = new ApolloClient({
 });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <AuthProvider>
-      <ApolloProvider client={client}>
-        <BrowserRouter>
-          <App />
-          <ToastContainer />
-        </BrowserRouter>
-      </ApolloProvider>
-    </AuthProvider>
-  </React.StrictMode>
+  <AuthProvider>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <App />
+        <ToastContainer />
+      </BrowserRouter>
+    </ApolloProvider>
+  </AuthProvider>
 );

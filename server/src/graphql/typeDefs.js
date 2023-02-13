@@ -12,7 +12,7 @@ export const typeDefs = gql`
       confirmPassword: String!
     ): User
     login(email: String!, password: String!): AuthPayload
-    handleRefreshToken: Token
+    handleRefreshToken: RefreshToken
     handleLogout: User
   }
 
@@ -22,8 +22,9 @@ export const typeDefs = gql`
     username: String
   }
 
-  type Token {
+  type RefreshToken {
     token: String
+    user: User
   }
 
   type AuthPayload {

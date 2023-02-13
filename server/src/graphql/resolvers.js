@@ -114,11 +114,11 @@ export const resolvers = {
             },
           },
           JWT_ACCESSTOKEN,
-          { expiresIn: "1d" }
+          { expiresIn: "1h" }
         );
         const token = accessToken;
 
-        return { token };
+        return { token, user: foundUser };
       });
     },
 
@@ -132,7 +132,7 @@ export const resolvers = {
       foundUser.refreshToken = ''
       const result = await foundUser.save();
 
-      return result;
+      return result
       } catch (error) {
         console.log(error);
       }

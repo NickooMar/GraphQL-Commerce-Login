@@ -25,8 +25,13 @@ export const LOGIN_USER = gql`
 
 export const REFRESH_TOKEN = gql`
   mutation {
-    handleRefreshToken{
+    handleRefreshToken {
       token
+      user {
+        _id
+        email
+        username
+      }
     }
   }
 `;
