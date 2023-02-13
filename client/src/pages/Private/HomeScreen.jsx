@@ -1,21 +1,11 @@
 import React, { useContext } from 'react'
 
 import useAuth from "../../hooks/useAuth";
-import useRefreshToken from "../../hooks/useRefreshToken";
+import useLogout  from "../../hooks/useLogout";
 
 const HomeScreen = () => {
-
-  const { authData, setAuthData } = useAuth();
-  // const refresh = useRefreshToken()
-
-  const logout = () => {
-    setAuthData({});
-    localStorage.removeItem("refreshToken");
-  }
-
-  // const handleRefresh = async() => {
-  //   await refresh();
-  // }
+  const { authData } = useAuth();
+  const logout = useLogout();
 
   return (
     <div className="h-screen w-screen bg-[#6d2ef1]">

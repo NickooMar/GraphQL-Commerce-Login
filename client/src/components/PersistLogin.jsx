@@ -28,11 +28,6 @@ const [ persist ] = useLocalStorage('persist', false)
        : setIsLoading(false);
     }, [])
     
-    useEffect(() => {
-      console.log(`Is loading: ${isLoading}`)
-      console.log(`AT: ${JSON.stringify(authData)}`);
-    }, [isLoading])
-    
 
   return (
     <>{!persist ? <Outlet /> : isLoading ? <p>Loading ...</p> : <Outlet />}</>
