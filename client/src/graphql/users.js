@@ -12,12 +12,21 @@ export const CREATE_USER = gql `
 export const LOGIN_USER = gql`
   mutation ($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      token
+      accessToken
       user {
         _id
         email
         username
       }
+      refreshToken
+    }
+  }
+`;
+
+export const REFRESH_TOKEN = gql`
+  mutation {
+    handleRefreshToken{
+      token
     }
   }
 `;

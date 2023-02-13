@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { JWT_TOKEN } from "../config.js";
+import { JWT_ACCESSTOKEN, JWT_REFRESHTOKEN } from "../config.js";
 
 export const resolvers = {
   Query: {
@@ -40,7 +40,7 @@ export const resolvers = {
         throw new Error(error);
       }
     },
-    login: async (_, args) => {
+    login: async (_, args, { req, res }) => {
       const { email, password } = args;
 
       if (!email || !password) throw new Error("Please! Complete all fields");
@@ -63,18 +63,65 @@ export const resolvers = {
                 email: userFound.email,
               },
             },
-            JWT_TOKEN,
+            JWT_ACCESSTOKEN,
+            { expiresIn: "10min" }
+          );
+
+          const refreshToken = jwt.sign(
+            {
+              email: userFound.email,
+              username: userFound.username,
+              _id: userFound._id,
+            },
+            JWT_REFRESHTOKEN,
             { expiresIn: "1d" }
           );
 
-          console.log({ userFound, accessToken });
-          return { user: userFound, token: accessToken };
+          userFound.refreshToken = refreshToken;
+          await userFound.save();          
+          
+
+          return {
+            user: userFound,
+            accessToken,
+            refreshToken
+          };
         } else {
           throw new Error("Passwords doesn't match");
         }
       } catch (error) {
         throw new Error(error);
       }
+    },
+    handleRefreshToken: async (_, args, {req}) => {
+      const refreshToken = req.headers.authorization;
+
+      const foundUser = await User.findOne({ refreshToken }).exec();
+      if (!foundUser) throw new Error("User not found - Unauthorized");
+
+      return jwt.verify(refreshToken, JWT_REFRESHTOKEN, (err, decoded) => {
+        if (
+          err ||
+          foundUser.email !== decoded.email ||
+          foundUser.username !== decoded.username
+        )
+          throw new Error("User not match - Unauthorized");
+
+        const accessToken = jwt.sign(
+          {
+            UserInfo: {
+              username: decoded.username,
+              email: decoded.email,
+            },
+          },
+          JWT_ACCESSTOKEN,
+          { expiresIn: "1d" }
+        );
+        const token = accessToken;
+        console.log(token);
+
+        return { token };
+      });
     },
   },
 };
