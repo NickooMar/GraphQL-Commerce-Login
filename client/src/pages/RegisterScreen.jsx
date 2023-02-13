@@ -200,7 +200,7 @@ const RegisterScreen = () => {
               <a
                 href="https://www.tiendanube.com/herramientas/generador-terminos-condiciones"
                 target="_blank"
-                className="text-[#6d2ef1] font-semibold"
+                className="text-[#6d2ef1] font-semibold ml-1"
               >
                 Terms & Conditions
               </a>

@@ -123,20 +123,20 @@ const LoginScreen = () => {
           </div>
 
           <div
-            className="flex flex-col mx-8 mt-10 items-center justify-center"
+            className="flex flex-col mx-8 mt-8 items-center justify-center"
             style={{ fontFamily: "montserrat" }}
           >
-            <h1 className="mb-4 text-[#6d2ef1] font-semibold">
+            <h1 className="mb-2 text-[#6d2ef1] font-semibold">
               <a href="">Forgot password?</a>
             </h1>
-            <div className="persistCheck">
+            <div className="mb-2">
               <input
                 type="checkbox"
                 onChange={toggleCheck}
                 checked={check}
                 id="persist"
               />
-              <label htmlFor="persist">Trust this device</label>
+              <label htmlFor="persist" className='ml-1'>Trust this device</label>
             </div>
             <button
               type="submit"
@@ -144,7 +144,7 @@ const LoginScreen = () => {
             >
               <h1 className="text-lg">SIGN IN</h1>
             </button>
-            <h1 className="mt-6">
+            <h1 className="mt-3">
               Don't have an account?
               <a
                 onClick={() => navigate("/register")}
