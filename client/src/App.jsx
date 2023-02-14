@@ -7,17 +7,19 @@ import RequireAuth from "./components/RequireAuth";
 import Missing from "./pages/Missing";
 import PersistLogin from "./components/PersistLogin";
 
+import { commerce } from "./lib/Commerce";
+
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<LoginScreen />} />
+      <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
 
       {/* Authorized Screen */}
       <Route element={<PersistLogin />}>
-        <Route element={<RequireAuth />}>
-          <Route path="/home" element={<HomeScreen />} />
-        </Route>
+        {/* <Route element={<RequireAuth />}> */}
+          <Route path="/" element={<HomeScreen />} />
+        {/* </Route> */}
       </Route>
 
       <Route path="*" element={<Missing />} />

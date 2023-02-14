@@ -14,18 +14,21 @@ const [ persist ] = useLocalStorage('persist', false)
 
 
     useEffect(() => {
-     const verifyRefreshToken = async () => {
-        try {
-            await refresh();
-        } catch (error) {
-            console.log(error)
-        } finally {
-            setIsLoading(false)
+      if(persist){
+        const verifyRefreshToken = async () => {
+           try {
+               await refresh();
+           } catch (error) {
+               console.log(error)
+           } finally {
+               setIsLoading(false)
+           }
         }
-     }
-     !authData?.accessToken && persist
-       ? verifyRefreshToken()
-       : setIsLoading(false);
+        
+        !authData?.accessToken && persist
+          ? verifyRefreshToken()
+          : setIsLoading(false);
+      }
     }, [])
     
 

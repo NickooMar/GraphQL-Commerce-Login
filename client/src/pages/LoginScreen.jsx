@@ -52,7 +52,7 @@ const LoginScreen = () => {
 
         setAuthData({ user, accessToken });
         localStorage.setItem("refreshToken", refreshToken);
-        navigate("/home", { replace: true });
+        navigate("/", { replace: true });
         toast.success("Login Succesfully");
       } catch (error) {
         console.log(error)

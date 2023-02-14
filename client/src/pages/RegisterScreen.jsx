@@ -214,7 +214,7 @@ const RegisterScreen = () => {
             <h1 className="mt-4">
               Already have an account?
               <a
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/login")}
                 className="cursor-pointer text-[#6d2ef1] font-semibold ml-2"
               >
                 Sign In
