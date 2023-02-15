@@ -106,13 +106,14 @@ const RegisterScreen = () => {
             style={{ fontFamily: "montserrat" }}
           >
             <input
-              type="text"
+              type="email"
               name="email"
               id="email"
               placeholder="Email"
               className="shadow-[0_4px_8px_-2px] shadow-[#6d2ef1] rounded-3xl  p-1.5 h-10 px-9"
               onChange={handleChange}
               value={formFields.email}
+              autoComplete="off"
             />
             <MdEmail
               size={28}
@@ -132,6 +133,7 @@ const RegisterScreen = () => {
               className="shadow-[0_4px_8px_-2px] shadow-[#6d2ef1] rounded-3xl  p-1.5 h-10 px-9"
               onChange={handleChange}
               value={formFields.username}
+              autoComplete="off"
             />
             <BiUserCircle
               size={28}

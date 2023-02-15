@@ -36,7 +36,7 @@ const NoUserNavbar = () => {
           <h1>Crear cuenta</h1>
           <h1>Crear cuenta</h1>
         </div>
-        <div className="items-center space-x-8 mx-2 hidden md:flex">
+        <div className="items-center space-x-8 mx-2 hidden lg:flex">
           <a href="/login" className="text-lg hover:opacity-50">
             Login
           </a>
@@ -52,7 +52,7 @@ const NoUserNavbar = () => {
       </div>
       {collapseToggle ? (
         <>
-          <div className="flex md:hidden absolute top-3 ml-2 text-white">
+          <div className="flex lg:hidden absolute top-3 ml-2 text-white">
             <button
               className="p-2"
               onClick={() => setCollapseToggle(!collapseToggle)}
@@ -65,7 +65,7 @@ const NoUserNavbar = () => {
             </button>
           </div>
           <div
-            className="md:hidden flex space-x-10 p-8 items-center justify-center text-white bg-slate-900"
+            className="lg:hidden flex space-x-10 p-8 items-center justify-center text-white bg-slate-900 h-12 mt-4"
             onClick={() => setCollapseToggle(!collapseToggle)}
           >
             <a href="/login" className="text-lg hover:opacity-50">

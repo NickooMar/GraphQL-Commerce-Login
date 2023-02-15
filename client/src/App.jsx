@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import RegisterScreen from "./pages/RegisterScreen";
 import LoginScreen from "./pages/LoginScreen";
@@ -7,9 +7,14 @@ import RequireAuth from "./components/RequireAuth";
 import Missing from "./pages/Missing";
 import PersistLogin from "./components/PersistLogin";
 
-import { commerce } from "./lib/Commerce";
+
+import useAuth from "./hooks/useAuth";
 
 const App = () => {
+
+
+
+
   return (
     <Routes>
       <Route path="/login" element={<LoginScreen />} />
