@@ -27,7 +27,7 @@ const NoUserNavbar = () => {
               alt="Logo"
               className="w-16 h-16 rounded-lg hidden lg:flex"
             />
-            <h1 className="text-2xl font-mono ml-2.5">Commerce</h1>
+            <h1 className="text-2xl font-sans ml-2.5">Commerce</h1>
           </a>
         </div>
         <div className="hidden lg:flex space-x-8 items-center justify-center">
@@ -112,7 +112,7 @@ const NoUserNavbar = () => {
                 alt="Logo"
                 className="w-16 h-16 rounded-lg hidden lg:flex"
               />
-              <h1 className="text-2xl font-mono ml-2.5">Commerce</h1>
+              <h1 className="text-2xl font-sans ml-2.5">Commerce</h1>
             </a>
           </div>
           <div className="hidden lg:flex space-x-8 items-center justify-center">

@@ -1,3 +1,3 @@
-import commerceLogo from "./commerceLogo.jpg";
+import commerceLogo from "./commerceLogo1.jpg";
 
 export default commerceLogo ;

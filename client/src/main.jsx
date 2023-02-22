@@ -9,6 +9,7 @@ import { AuthProvider } from "./context/AuthProvider";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000/graphql',

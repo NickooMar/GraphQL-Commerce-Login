@@ -1,77 +1,95 @@
-import React from 'react'
+import React from "react";
 
-const ProductCard = ({product}) => {
-  console.log(product);
+import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
+
+const ProductCard = ({ product }) => {
+  const { authData } = useAuth();
+
   return (
-    // <div className="w-5/6 h-full  bg-[#230C33] rounded-2xl">
-    //   <div className="flex flex-col items-center justify-center text-white relative ">
-    //     <img
-    //       src={product?.image?.url}
-    //       alt="ProductImage"
-    //       className="h-[400px] top-14 relative z-10"
-    //     />
-    //     <h1
-    //       style={{ fontFamily: "montserrat" }}
-    //       className="bg-[#9984D4] absolute top-0 left-0 py-1 px-3 text-lg m-2 rounded-xl"
-    //     >
-    //       NEW
-    //     </h1>
-    //     <h1
-    //       className="absolute font-mono text-7xl font-bold top-8 z-0 opacity-70"
-    //       style={{
-    //         fontSize: 68,
-    //         fontFamily: "montserrat",
-    //       }}
-    //     >
-    //       Oversize
-    //     </h1>
-    //     <div className="flex flex-col bg-white h-full w-full text-black rounded-b-lg pt-10">
-    //       {/* <div style={{ height: "80px", overflow: "hidden" }}>
-    //         <svg
-    //           viewBox="0 0 500 150"
-    //           preserveAspectRatio="none"
-    //           style={{ height: "100%", width: "100%" }}
-    //         >
-    //           <path
-    //             d="M0.00,92.27 C216.83,192.92 304.30,8.39 500.00,109.03 L500.00,0.00 L0.00,0.00 Z"
-    //             style={{ stroke: "none", fill: "#230C33" }}
-    //           ></path>
-    //         </svg>
-    //       </div> */}
-
-    //       <h1
-    //         className="text-4xl italic pt-2 text-center"
-    //         style={{ fontFamily: "montserrat" }}
-    //       >
-    //         {product.name}
-    //       </h1>
-    //       <p className="text-lg italic pt-2 ml-2"
-    //         style={{ fontFamily: "montserrat" }} > <span className='font-semibold'>Price:</span> ${product?.price.formatted}</p>
-    //       <button
-    //         type="button"
-    //         className="py-3 px-4 bg-[#592E83] flex justify-center items-center h-1/2 w-full text-white rounded-lg mt-4"
-    //         style={{ fontFamily: "montserrat" }}
-    //       >
-    //         See More
-    //       </button>
-    //     </div>
-    //   </div>
-    // </div>
-
-
-    <div className='grid grid-cols-2 h-full w-full border-4 border-black'>
-      <div className='bg-gradient-to-r from-indigo-600 to-blue-900 rounded-l-2xl relative'>
-        <img src={product.image.url} alt="productImage" />
-      </div>
-      <div className='bg-white rounded-r-2xl'>
-
+    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <Link to={`/${product.id}`} state={{ product }}>
+        <img
+          className="p-8 rounded-t-lg"
+          src={product.image.url}
+          alt="product image"
+        />
+      </Link>
+      <div className="px-5 pb-5">
+        <Link to={`/${product.id}`} state={{ product }}>
+          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+            {product.name}
+          </h5>
+        </Link>
+        <div className="flex items-center mt-2.5 mb-5">
+          <svg
+            aria-hidden="true"
+            className="w-5 h-5 text-yellow-300"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>First star</title>
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+          </svg>
+          <svg
+            aria-hidden="true"
+            className="w-5 h-5 text-yellow-300"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>Second star</title>
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+          </svg>
+          <svg
+            aria-hidden="true"
+            className="w-5 h-5 text-yellow-300"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>Third star</title>
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+          </svg>
+          <svg
+            aria-hidden="true"
+            className="w-5 h-5 text-yellow-300"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>Fourth star</title>
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+          </svg>
+          <svg
+            aria-hidden="true"
+            className="w-5 h-5 text-yellow-300"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>Fifth star</title>
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+          </svg>
+          <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
+            5.0
+          </span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-3xl font-bold text-gray-900 dark:text-white">
+            {product.price.formatted_with_symbol}
+          </span>
+          <button
+            disabled={!authData.user ? true : false}
+            className="text-white bg-blue-700 disabled:opacity-50 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:opacity-50"
+          >
+            Add to cart
+          </button>
+        </div>
       </div>
     </div>
-
-
-
-
   );
-}
+};
 
-export default ProductCard
+export default ProductCard;
