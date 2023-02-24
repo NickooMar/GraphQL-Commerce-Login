@@ -12,23 +12,11 @@ import { Carousel } from "react-responsive-carousel";
 import "./HomeScreen.css";
 
 const HomeScreen = () => {
-  const { authData } = useAuth();
+  const { authData, fetchCart, fetchProducts, products, cart, order } = useAuth();
   const [LoggedInNavbar, NoUserNavbar] = useNavbar();
 
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState({});
-  const [order, setOrder] = useState({});
-
-  const fetchCart = async () => {
-    const data = await commerce.cart.retrieve();
-    console.log(data);
-  };
-
-  const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
-    setProducts(data);
-  };
-
+  console.log(cart)
+  
   useEffect(() => {
     if (authData.user) {
       fetchCart();
@@ -36,7 +24,6 @@ const HomeScreen = () => {
     fetchProducts();
   }, [authData.user]);
 
-  console.log(authData);
 
   return (
     <>

@@ -4,7 +4,6 @@ import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
-  const { authData } = useAuth();
 
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -80,12 +79,13 @@ const ProductCard = ({ product }) => {
           <span className="text-3xl font-bold text-gray-900 dark:text-white">
             {product.price.formatted_with_symbol}
           </span>
-          <button
-            disabled={!authData.user ? true : false}
+          <Link
+            to={`/${product.id}`}
+            state={{ product }}
             className="text-white bg-blue-700 disabled:opacity-50 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:opacity-50"
           >
             Add to cart
-          </button>
+          </Link>
         </div>
       </div>
     </div>
